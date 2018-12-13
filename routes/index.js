@@ -125,11 +125,19 @@ router.get('/user',function (req,res) {
         return res.send({code: 1, msg: '请先登陆'})
     }
     UserModel.findOne({_id:userid},filter,function (error,user) {
-        console.log('123'+user)
         res.send({code:0,data:user})
     })
 })
+
+
+//获取用户列表(根据类型)
+router.get('/userlist',function (req,res) {
+    const {type} = req.query
+    console.log(req)
+
+    UserModel.find({type},filter,function (error,users) {
+        res.send({code:0,data:users})
+    })
+})
+
 module.exports = router;
-
-
-
